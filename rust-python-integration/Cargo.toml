@@ -6,10 +6,3 @@ edition = "2021"
 [dependencies]
 pyo3 = { version = "0.23.4", features = ["extension-module"] }
 libc = "0.2.110"
-
-[target.x86_64-apple-darwin]
-rustflags = [
-    "-L/Library/Frameworks/Python.framework/Versions/3.13/lib",
-    "-I/Library/Frameworks/Python.framework/Versions/3.13/include/python3.13",
-    "-lpython3.13"
-]
