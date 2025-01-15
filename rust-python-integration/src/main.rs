@@ -12,15 +12,22 @@ fn main() {
         // Initialize the Python interpreter
         Py_Initialize(); // Start the Python interpreter and set it up for execution.
 
-        // Add the virtual environment's `site-packages` to `sys.path`
-        let setup_code = CString::new(r#"
+        // Define the path to the virtual environment's Python executable
+        //(set this to your virtual environment's Python executable path)
+        let venv_path = "/Users/gigin/Documents/GitHub/multiway-graphs/.venv/lib/python3.13/site-packages";
+        // Add the virtual environment's `site-packages` to `sys.path` we defined in ven_path
+        let setup_code = format!(
+            r#"
 import sys
-sys.path.insert(0, '/Users/gigin/Documents/GitHub/multiway-graphs/.venv/lib/python3.13/site-packages')"#) 
-            // Define a Python script to modify `sys.path` by adding the virtual environment's package directory.
-            .expect("CString::new failed"); // Ensure that converting the Rust string to CString does not fail.
+sys.path.insert(0, '{}')
+"#,
+            venv_path
+        );
 
-        PyRun_SimpleString(setup_code.as_ptr()); 
-        // Execute the setup Python script to ensure the virtual environment is configured.
+        // Convert the setup code to a C-style string
+        let setup_string = CString::new(setup_code).expect("Failed to read CString.");
+        // Execute the setup code to add the virtual environment to `sys.path`
+        PyRun_SimpleString(setup_string.as_ptr());
 
         // Define the main Python script as a string.
         let python_code = CString::new(r#"
@@ -56,4 +63,5 @@ if __name__ == "__main__":
         // Finalize the Python interpreter
         Py_Finalize(); // Shut down the Python interpreter and clean up resources.
     }
+    println!("Finished executing the Python code from Rust.");
 }
