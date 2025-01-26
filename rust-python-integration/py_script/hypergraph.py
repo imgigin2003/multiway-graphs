@@ -1,7 +1,7 @@
 import hypernetx as hnx
 import matplotlib.pyplot as plt
 
-def draw_hypergraph():
+def create_hypergraph():
     # Define the hypergraph with hyperedges and their associated nodes
     hyperedges = {
         'e1': {'v1', 'v2', 'v3', 'v4'},
@@ -14,11 +14,12 @@ def draw_hypergraph():
 
     # Create a hypergraph object using the defined hyperedges
     H = hnx.Hypergraph(hyperedges)
+    return H
+
+def draw_hypergraph(H):
+    fig, ax = plt.subplots(figsize= (8, 6))
 
     # Visualize the hypergraph using hypernetx and matplotlib
-    hnx.draw(H, with_node_labels=True, with_edge_labels=True)
-    plt.title("Hypergraph")  # Set the title of the plot
-    plt.show()  # Display the plot in a window
+    hnx.draw(H, with_node_labels=True, with_edge_labels=True, ax = ax)
 
-if __name__ == "__main__":
-    draw_hypergraph()
+    return fig
