@@ -14,7 +14,7 @@ fn main() {
         Py_Initialize();
 
         // Define the path to the virtual environment's Python executable
-        let venv_path = "/Users/gigin/Documents/GitHub/multiway-graphs/.venv/lib/python3.13/site-packages";
+        let venv_path = "/Users/gigin/Documents/GitHub/multiway-graphs/myenv/lib/python3.13/site-packages";
         let setup_code = format!(
             r#"
 import sys
@@ -28,7 +28,7 @@ sys.path.insert(0, '{}')
         PyRun_SimpleString(setup_string.as_ptr());
 
         // Path to the external Python file
-        let python_file_path = "py_script/hypergraph.py";
+        let python_file_path = "py_script/main.py";
 
         // Read the Python script from the file
         let python_code = fs::read_to_string(python_file_path)
