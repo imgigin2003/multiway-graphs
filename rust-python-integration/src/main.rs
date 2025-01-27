@@ -1,6 +1,7 @@
 use std::ffi::CString;
 use std::fs;
 use std::os::raw::c_char;
+use std::process::Command;
 
 extern "C" {
     fn Py_Initialize(); // External function to initialize the Python interpreter.
@@ -15,12 +16,15 @@ fn main() {
 
         // Define the path to the virtual environment's Python executable
         let venv_path = "/Users/gigin/Documents/GitHub/multiway-graphs/myenv/lib/python3.13/site-packages";
+        let py_script_path = "/Users/gigin/Documents/GitHub/multiway-graphs/rust-python-integration/py_script";
         let setup_code = format!(
-            r#"
+    r#"
 import sys
+import os
+sys.path.insert(0, '{}')
 sys.path.insert(0, '{}')
 "#,
-            venv_path
+            venv_path, py_script_path
         );
 
         // Convert the setup code to a C-style string and execute it
@@ -38,6 +42,19 @@ sys.path.insert(0, '{}')
         let python_cstring = CString::new(python_code)
             .expect("Failed to create CString for Python code.");
 
+        //creates streamlit command line
+        let streamlit_command = Command::new("streamlit")
+            .arg("run")
+            .arg("py_script/main.py")
+            .status()
+            .expect("Failed to start Streamlit server");
+
+        if streamlit_command.success() {
+            println!("Streamlit app is running. Open your browser to view it.");
+        } else {
+            eprintln!("Failed to run the Streamlit app.");
+        }
+        
         // Execute the Python script
         if PyRun_SimpleString(python_cstring.as_ptr()) != 0 {
             eprintln!("Error occurred while executing the Python script.");
