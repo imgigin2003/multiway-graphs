@@ -1,5 +1,10 @@
 import streamlit as st #import the streamlit library
 from hypergraph import create_hypergraph, draw_hypergraph #import the hypergraph.py file
+import sys
+import os
+
+# Add the python/ directory to the Python path
+sys.path.append(os.path.join(os.path.dirname(__file__), "python"))
 
 def main():
     H = create_hypergraph() #calling the create_hypergraph function from hypergraph.py
@@ -43,6 +48,18 @@ def draw_hypergraph(H):
         """)
     
 
+    with tabs[2]: #third tab
+        display_properties(H)
+        
+def display_properties(H):
+    st.write("### Graph Properties")
+    nodes_list = list(H.nodes())
+    edges_list = list(H.edges())
+
+    st.write(f"Nodes: {nodes_list}")
+    st.write(f"Number of nodes: {len(nodes_list)}\n")
+    st.write(f"Edges: {edges_list}")
+    st.write(f"Number of edges: {len(edges_list)}")
 
 if __name__ == "__main__":
     main()
