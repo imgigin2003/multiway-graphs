@@ -80,17 +80,33 @@ def draw_hypergraph(H):
 
         # Add Hyperedge Subtab
         with edit_sub_tabs[0]:
-            st.write("#### Add Hyperedge")
-            new_edge_id = st.text_input("Enter new edge ID (e.g., e7):", key="new_edge_id")
-            new_nodes = st.text_input("Enter nodes for the new edge (comma-separated):", key="new_nodes")
+            st.write("#### Add Hyperedge") #display the title of the subtab
+            new_edge_id = st.text_input("Enter new edge ID (e.g., e7):", key="new_edge_id") #takes new edge from text input
+            new_nodes = st.text_input("Enter nodes for the new edge (comma-separated):", key="new_nodes") #takes new nodes from text input
             if st.button("Add Hyperedge"):
-                if new_edge_id and new_nodes:
-                    nodes_set = set(new_nodes.split(","))
-                    if new_edge_id in st.session_state.hyperedges:
+                if new_edge_id and new_nodes: #check if each text inputs aren't empty
+                    nodes_set = set(new_nodes.split(",")) #split the nodes list with ','
+                    if new_edge_id in st.session_state.hyperedges: #if edge exists in the edges list
                         st.warning("Edge ID already exists!")
                     else:
-                        st.session_state.hyperedges[new_edge_id] = nodes_set
-                        st.success(f"Hyperedge '{new_edge_id}' added with nodes {nodes_set}!")
+                        st.session_state.hyperedges[new_edge_id] = nodes_set #add the new nodes set to the visualize session
+                        st.success(f"Hyperedge '{new_edge_id}' added with nodes {nodes_set}!") #display a success operation
+
+        # Edit Hyperedge Subtab
+        with edit_sub_tabs[1]:
+            st.write("### Edit Hyperedge") # Display the title of the subtab
+            edge_to_edit = st.selectbox( # Dropdown to select an edge to edit
+                "Select an edge to edit:", options=st.session_state.hyperedges.keys()
+            )  
+            edited_nodes = st.text_input( # Text input for new nodes for the selected edge
+                "Enter new nodes for the selected edge (comma-separated):", key="edit_nodes" 
+            ) 
+            if st.button("Edit Hyperedge"): 
+                if edge_to_edit and edited_nodes: #check if the text inputs arent't empty
+                    new_nodes_set = set(edited_nodes.split(",")) #split the nodes list with ','
+                    st.session_state.hyperedges[edge_to_edit] = new_nodes_set #set the edited edges to the new node lise
+                    st.success(f"Hyperedge '{edge_to_edit}' updated with nodes '{new_nodes_set}") #display a success operation
+                    st.session_state.refresh = True  # Set refresh flag to True
 
 #defining a function to display the graph properties
 def display_properties(H):
