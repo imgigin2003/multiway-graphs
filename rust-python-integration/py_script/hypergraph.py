@@ -14,7 +14,7 @@ def create_hypergraph():
 
     # Create a hypergraph object using the defined hyperedges
     H = hnx.Hypergraph(hyperedges)
-    return H
+    return H, hyperedges
 
 def draw_hypergraph(H):
     fig, ax = plt.subplots(figsize= (8, 6))

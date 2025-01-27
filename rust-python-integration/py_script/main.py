@@ -1,5 +1,6 @@
 import streamlit as st #import the streamlit library
 from hypergraph import create_hypergraph, draw_hypergraph #import the hypergraph.py file
+import pandas as pd
 import sys
 import os
 
@@ -7,10 +8,16 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "python"))
 
 def main():
-    H = create_hypergraph() #calling the create_hypergraph function from hypergraph.py
+    H, hypergraphs = create_hypergraph() #calling the create_hypergraph function from hypergraph.py
 
     st.title("Intractive Hypergraph") #display the title of the web app
-    tabs = st.tabs(["Graph Visualization", "Graph Source Code", "Graph Properties", "Graph Table", "Graph Edit"]) #create tabs for the web app
+    tabs = st.tabs([
+        "Graph Visualization",
+        "Graph Source Code", 
+        "Graph Properties", 
+        "Graph Table", 
+        "Graph Edit"
+    ]) #create tabs for the web app
 
     with tabs[0]: #first tab
         st.write("### Graph Visualization") #display the title of the tab
@@ -49,10 +56,17 @@ def draw_hypergraph(H):
     
 
     with tabs[2]: #third tab
-        display_properties(H)
-        
+        display_properties(H) #calling the display_properties function
+
+    with tabs[3]:
+        display_table(hypergraphs)
+
+#defining a function to display the graph properties
 def display_properties(H):
+    # Display the title of the tab
     st.write("### Graph Properties")
+
+    # Display the number of nodes and edges in the hypergraph
     nodes_list = list(H.nodes())
     edges_list = list(H.edges())
 
@@ -60,6 +74,21 @@ def display_properties(H):
     st.write(f"Number of nodes: {len(nodes_list)}\n")
     st.write(f"Edges: {edges_list}")
     st.write(f"Number of edges: {len(edges_list)}")
+
+
+# Define a function to display the graph table
+def display_table(hyperedges):
+    st.write("### Graph Table")
+
+    # Create a DataFrame for edges and nodes
+    edge_data = [
+        {"Edge ID": edge_id, "Nodes": ", ".join(nodes)}
+        for edge_id, nodes in hyperedges.items()
+    ]
+    df = pd.DataFrame(edge_data)
+
+    # Display the table
+    st.dataframe(df)
 
 if __name__ == "__main__":
     main()
