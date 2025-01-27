@@ -1,5 +1,6 @@
 import streamlit as st #import the streamlit library
 from hypergraph import create_hypergraph, draw_hypergraph #import the hypergraph.py file
+import hypernetx as hnx
 import pandas as pd
 import sys
 import os
@@ -8,8 +9,12 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "python"))
 
 def main():
-    H, hypergraphs = create_hypergraph() #calling the create_hypergraph function from hypergraph.py
+    H, hyperedges = create_hypergraph() #calling the create_hypergraph function from hypergraph.py
 
+    if "hyperedges" not in st.session_state:
+        _, hyperedges = create_hypergraph()
+        st.session_state.hyperedges = hyperedges
+    
     st.title("Intractive Hypergraph") #display the title of the web app
     tabs = st.tabs([
         "Graph Visualization",
@@ -18,11 +23,20 @@ def main():
         "Graph Table", 
         "Graph Edit"
     ]) #create tabs for the web app
+    
+    with tabs[0]:  # Graph Visualization Tab
+        st.write("### Graph Visualization")
 
-    with tabs[0]: #first tab
-        st.write("### Graph Visualization") #display the title of the tab
-        fig = draw_hypergraph(H) #calling the draw_hypergraph function from hypergraph.py
-        st.pyplot(fig) #display the graph using the pyplot function from the streamlit library
+        # Create a hypergraph dynamically from session state
+        H = hnx.Hypergraph(st.session_state.hyperedges)
+
+        # Add a button to refresh the graph visualization manually
+        if st.button("Visualize ✨"):
+            st.session_state.refresh = True
+
+        if "refresh" in st.session_state:
+            fig = draw_hypergraph(H)  # Visualize the updated hypergraph
+            st.pyplot(fig)
 
     with tabs[1]: #second tab
         st.write("### Graph Code Snippet") #display the title of the tab
@@ -53,13 +67,30 @@ def draw_hypergraph(H):
 
     return fig
         """)
-    
 
     with tabs[2]: #third tab
         display_properties(H) #calling the display_properties function
 
-    with tabs[3]:
-        display_table(hypergraphs)
+    with tabs[3]: #forth tab
+        display_table(hyperedges)
+
+    with tabs[4]: #fifth tab
+        st.write("### Graph Edit")
+        edit_sub_tabs = st.tabs(["Add Hyperedge", "Edit Hyperedge", "Delete Hyperedge"])  # Renamed to 'edit_sub_tabs'
+
+        # Add Hyperedge Subtab
+        with edit_sub_tabs[0]:
+            st.write("#### Add Hyperedge")
+            new_edge_id = st.text_input("Enter new edge ID (e.g., e7):", key="new_edge_id")
+            new_nodes = st.text_input("Enter nodes for the new edge (comma-separated):", key="new_nodes")
+            if st.button("Add Hyperedge"):
+                if new_edge_id and new_nodes:
+                    nodes_set = set(new_nodes.split(","))
+                    if new_edge_id in st.session_state.hyperedges:
+                        st.warning("Edge ID already exists!")
+                    else:
+                        st.session_state.hyperedges[new_edge_id] = nodes_set
+                        st.success(f"Hyperedge '{new_edge_id}' added with nodes {nodes_set}!")
 
 #defining a function to display the graph properties
 def display_properties(H):
