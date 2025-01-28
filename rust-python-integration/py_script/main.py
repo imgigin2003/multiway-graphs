@@ -91,7 +91,7 @@ def draw_hypergraph(H):
                     else:
                         st.session_state.hyperedges[new_edge_id] = nodes_set #add the new nodes set to the visualize session
                         st.success(f"Hyperedge '{new_edge_id}' added with nodes {nodes_set}!") #display a success operation
-
+                
         # Edit Hyperedge Subtab
         with edit_sub_tabs[1]:
             st.write("### Edit Hyperedge") # Display the title of the subtab
@@ -107,6 +107,7 @@ def draw_hypergraph(H):
                     st.session_state.hyperedges[edge_to_edit] = new_nodes_set #set the edited edges to the new node lise
                     st.success(f"Hyperedge '{edge_to_edit}' updated with nodes '{new_nodes_set}") #display a success operation
                     st.session_state.refresh = True  # Set refresh flag to True
+    
 
 #defining a function to display the graph properties
 def display_properties(H):
