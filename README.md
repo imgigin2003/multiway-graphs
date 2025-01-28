@@ -1,4 +1,4 @@
-# multiway graphs
+# Multiway Graphs (Hypergraph)
 
 - py_script/hypergraph.py -> visualizes a hypergraph based on the given info
 
