@@ -72,7 +72,7 @@ def draw_hypergraph(H):
         display_properties(H) #calling the display_properties function
 
     with tabs[3]: #forth tab
-        display_table(hyperedges)
+        display_table(st.session_state.hyperedges)
 
     with tabs[4]: #fifth tab
         st.write("### Graph Edit")
@@ -108,6 +108,18 @@ def draw_hypergraph(H):
                     st.success(f"Hyperedge '{edge_to_edit}' updated with nodes '{new_nodes_set}") #display a success operation
                     st.session_state.refresh = True  # Set refresh flag to True
     
+        # Delete Hyperedge Subtab
+        with edit_sub_tabs[2]:
+            st.write("### Delete Hyperedge") # Display the title of the subtab
+            edges_to_delete = st.selectbox( # Dropdown to select an edge to delete
+                "Select an edge tp delete:", options=list(st.session_state.hyperedges.keys()) 
+            )
+            if st.button("Delete Hyperedge"): # Button to delete the selected edge
+                if edges_to_delete:  # Check if the selected edge is not empty
+                    del st.session_state.hyperedges[edges_to_delete] #delete the selected edge
+                    st.success(f"Hyperedge '{edges_to_delete}' deleted successfully.") #display a success operation
+                    st.session_state.refresh = True # Set refresh flag to True
+
 
 #defining a function to display the graph properties
 def display_properties(H):
