@@ -15,7 +15,6 @@
 # Usage
 
 - after running, hit 'visualize' in the first tab to get the default graph
-- in the 'Graph Source Code' tab you can see the code snippet
 - in the 'Graph Properties' and 'Graph Table' tabs, you can see the information about the graph
 - in the 'Graph Edit' tab, you can see three subtabs. one for Add, one for Edit, and one for Delete
   - in 'Add' subtab, enter the edge name and nodes you want to include
