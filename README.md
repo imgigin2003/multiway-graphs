@@ -6,7 +6,7 @@
 
 # How to run?
 
-- ensure your python environment it activated
+- ensure your python environment is activated
 - change the directory paths specified in the 'main.rs' file with your own Python enviroment and installation
 - ensure you have 'hypernetx', 'streamlit', 'matplotlib' installed in your Python packages
 - enter the rust-python-integration folder
