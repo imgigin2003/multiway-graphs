@@ -9,7 +9,11 @@
 - change the directory paths specified in the 'main.rs' file with your own Python enviroment and installation
 - ensure you have 'hypernetx', 'streamlit', 'matplotlib' installed in your Python packages
 - enter the rust-python-integration folder
-- run 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' to avoid any FFI error
+- to avoid any ffi error:
+  - run 'echo $SHELL'
+    - if it returns '/bin/bash, then run -> echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.bashrc
+    - if it returns '/bin/zsh, then run -> echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.zshrc
+  - based on your shell, run either 'source ~/.bashrc' or 'source ~/.zshrc
 - in the terminal, execute the program with 'cargo run'
 
 # Usage
