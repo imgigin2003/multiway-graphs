@@ -53,9 +53,7 @@ def main():
             # Visualize the dual hypergraph
             fig = draw_dual_graph(H_dual)
             st.pyplot(fig)
-
-
-    
+            
 
     with tabs[2]: #third tab
         display_properties(H) #calling the display_properties function

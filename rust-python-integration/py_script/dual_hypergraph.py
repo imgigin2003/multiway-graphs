@@ -16,6 +16,6 @@ def create_dual_graph(H):
     return H_dual
 
 def draw_dual_graph(H_dual):
-    fig, ax = plt.subplots(figsize=(10, 8))
-    hnx.draw(H_dual, with_node_labels= True, with_edge_labels= True,  ax=ax)
-    return fig
+    fig, ax = plt.subplots(figsize=(10, 8)) #creates a matplotlib figure
+    hnx.draw(H_dual, with_node_labels= True, with_edge_labels= True,  ax=ax) #draws the graph based on the axes provided 
+    return fig 
