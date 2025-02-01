@@ -1,5 +1,6 @@
 import streamlit as st #import the streamlit library
 from hypergraph import create_hypergraph, draw_hypergraph #import the hypergraph.py file
+from dual_hypergraph import create_dual_graph, draw_dual_graph #import the dual_hypergraph.py
 import hypernetx as hnx #import hypernetx library
 import pandas as pd #import pandas to work with tabular data
 
@@ -10,23 +11,24 @@ def main():
     if "hyperedges" not in st.session_state:
         _, hyperedges = create_hypergraph()
         st.session_state.hyperedges = hyperedges
-    
+
     st.title("Intractive Hypergraph") #display the title of the web app
     tabs = st.tabs([
-        "Graph Visualization", 
+        "HyperGraph Visualization", 
+        "Dual HyperGraph Visualization",
         "Graph Properties", 
         "Graph Table", 
         "Graph Edit"
     ]) #create tabs for the web app
     
-    with tabs[0]:  # Graph Visualization Tab
-        st.write("### Graph Visualization")
+    with tabs[0]:  # HyperGraph Visualization Tab
+        st.write("### HyperGraph Visualization")
 
         # Create a hypergraph dynamically from session state
         H = hnx.Hypergraph(st.session_state.hyperedges)
 
         # Add a button to refresh the graph visualization manually
-        if st.button("Visualize ✨"):
+        if st.button("Visualize HyperGraph✨"):
             st.session_state.refresh = True
 
         if "refresh" in st.session_state:
@@ -34,13 +36,34 @@ def main():
             st.pyplot(fig)
 
 
-    with tabs[1]: #third tab
+    with tabs[1]:  # Dual HyperGraph Visualization Tab
+        st.write("### Dual HyperGraph Visualization")
+
+        # Create the original hypergraph dynamically
+        H = hnx.Hypergraph(st.session_state.hyperedges)
+
+        # Create the dual hypergraph
+        H_dual = create_dual_graph(H)
+
+        # Button to refresh the dual graph visualization
+        if st.button("Visualize Dual HyperGraph✨"):
+            st.session_state.refresh = True
+
+        if "refresh" in st.session_state:
+            # Visualize the dual hypergraph
+            fig = draw_dual_graph(H_dual)
+            st.pyplot(fig)
+
+
+    
+
+    with tabs[2]: #third tab
         display_properties(H) #calling the display_properties function
 
-    with tabs[2]: #forth tab
+    with tabs[3]: #forth tab
         display_table(st.session_state.hyperedges)
 
-    with tabs[3]: #fifth tab
+    with tabs[4]: #fifth tab
         st.write("### Graph Edit")
         edit_sub_tabs = st.tabs(["Add Hyperedge", "Edit Hyperedge", "Delete Hyperedge"])  # Renamed to 'edit_sub_tabs'
 
