@@ -1,6 +1,7 @@
 # Multiway Graphs (Hypergraph)
 
 - py_script/hypergraph.py -> visualizes a hypergraph based on the given info
+- py_script/dual_hypergraph.py -> visualizes the dual hypergraph based on the hypergraph
 - py_scrtip/main.py -> utilizes a web app for displaying the graph info
 - src/main.py -> compliling python code and handling streamlit
 
