@@ -56,10 +56,18 @@ def main():
             
 
     with tabs[2]: #third tab
-        display_properties(H) #calling the display_properties function
+        st.write("### Graphs Properties")
+        display_properties(H, "HyperGraph") #displays the properties for the original graph
+
+        H_dual = create_dual_graph(H)
+        display_properties(H_dual, "Dual HyperGraph") #displays the propeties for the dual graph
 
     with tabs[3]: #forth tab
-        display_table(st.session_state.hyperedges)
+        st.write("### Graphs Tables")
+        display_table(st.session_state.hyperedges, "HyperGraph") #displays the table for the original graph
+
+        H_dual = create_dual_graph(H)
+        display_table(H_dual, "Dual HyperGraph") #displays the table for the dual graph
 
     with tabs[4]: #fifth tab
         st.write("### Graph Edit")
@@ -109,9 +117,9 @@ def main():
 
 
 #defining a function to display the graph properties
-def display_properties(H):
+def display_properties(H, graph_type):
     # Display the title of the tab
-    st.write("### Graph Properties")
+    st.write(f"### {graph_type} Properties")
 
     # Display the number of nodes and edges in the hypergraph
     nodes_list = list(H.nodes())
@@ -124,18 +132,27 @@ def display_properties(H):
 
 
 # Define a function to display the graph table
-def display_table(hyperedges):
-    st.write("### Graph Table")
+def display_table(graph, graph_type):
+    st.write(f"### {graph_type} Table")
 
-    # Create a DataFrame for edges and nodes
-    edge_data = [
-        {"Edge ID": edge_id, "Nodes": ", ".join(nodes)}
-        for edge_id, nodes in hyperedges.items()
-    ]
-    df = pd.DataFrame(edge_data)
+    if isinstance(graph, dict): #The function checks whether graph is a dictionary
+        #(which could represent an edge list or hypergraph where keys are edges and values are nodes connected by those edges)
+        edge_data = [
+            {"Edge ID": edge_id, "Nodes": ", ".join(str(node) for node in nodes)}
+            for edge_id, nodes in graph.items()
+        ]
 
-    # Display the table
-    st.dataframe(df)
+    else: #this block is expected to be a mapping where keys are nodes and values are the edges that the node is part of
+        edge_data = []
+        node_to_edges = {}
+        for node, edges in graph.incidence_dict.items():
+            node_to_edges[node] = {str(edge) for edge in edges}
+        for node, edges in node_to_edges.items():
+            edge_data.append({"Node": str(node), "Edges": ", ".join(sorted(edges))})
+
+    df = pd.DataFrame(edge_data) #visualizes it as tabular data
+    st.dataframe(df) # Display the table
+
 
 if __name__ == "__main__":
     main()
