@@ -8,7 +8,7 @@
 # How to run?
 
 1. install python if you already haven't, verify by running `python3 --version`
-2. enter the `rust-python-integration- directory
+2. enter the `rust-python-integration` directory
 3. ensure your python environment is activated. run the following commands:
 
 - `python3 -m venv myvenv`
