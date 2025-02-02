@@ -1,3 +1,0 @@
-cargo:rustc-link-lib=python3.13
-cargo:rustc-link-search=native=/Library/Frameworks/Python.framework/Versions/3.13/lib
-cargo:rustc-link-search=native=/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/config-3.13-darwin
