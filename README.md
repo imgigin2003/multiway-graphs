@@ -11,7 +11,7 @@
 2. run `echo $LIBRARY_PATH` to ensure that the library path is being picked up correctly
 
 - you get something like this: `/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib`
-- update you ` build.rs` file based on the library path you get.
+- update your `build.rs` file based on the library path you get.
 - E.g:
 
   - ```rust
