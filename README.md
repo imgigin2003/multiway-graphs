@@ -7,11 +7,11 @@
 
 # How to run?
 
-1. install python if you already haven't, verify by running `bash python3 --version`
-2. run `bash echo $LIBRARY_PATH` to ensure that the library path is being picked up correctly
+1. install python if you already haven't, verify by running `python3 --version`
+2. run `echo $LIBRARY_PATH` to ensure that the library path is being picked up correctly
 
-- you get something like this: `bash/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib`
-- update you `bash build.rs` file based on the library path you get.
+- you get something like this: `/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib`
+- update you ` build.rs` file based on the library path you get.
 - E.g:
 
   - ```rust
@@ -29,18 +29,18 @@
 
 3. to be more sure that you won't get any FFI erros, complete the following steps:
 
-- run ```bash echo $SHELL```
+- run ```echo $SHELL```
 
-  - if it returns ```bash /bin/bash```, then run -> ```bash echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.bashrc```
-  - if it returns ```bash /bin/zsh```, then run -> ```bash echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.zshrc```
+  - if it returns ```/bin/bash```, then run -> ```echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.bashrc```
+  - if it returns ```/bin/zsh```, then run -> ```echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.zshrc```
 
-- based on your shell, run either ```bash source ~/.bashrc``` or ```bash source ~/.zshrc```
+- based on your shell, run either ```source ~/.bashrc``` or ```source ~/.zshrc```
 
 4. run the following to compile the program:
 
-- `bash cargo clean`
-- `bash cargo build`
-- `bash cargo run`
+- `cargo clean`
+- `cargo build`
+- `cargo run`
 
 # Usage
 
