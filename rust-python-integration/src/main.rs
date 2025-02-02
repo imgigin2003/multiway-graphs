@@ -14,6 +14,24 @@ fn main() {
         // Initialize the Python interpreter
         Py_Initialize();
 
+        // Dynamically get Python executable path and site-packages
+        let setup_code = r#"
+import sys
+import os
+
+# Automatically detect the current working directory and append the py_script path
+py_script_path = os.path.join(os.getcwd(), 'py_script')
+sys.path.insert(0, py_script_path)
+
+# Alternatively, use an environment variable for py_script path
+# py_script_path = os.getenv("PY_SCRIPT_PATH", os.path.join(os.getcwd(), 'py_script'))
+# sys.path.insert(0, py_script_path)
+"#;
+
+        // Convert the setup code to a C-style string and execute it
+        let setup_string = CString::new(setup_code).expect("Failed to create CString for setup code.");
+        PyRun_SimpleString(setup_string.as_ptr());
+
         // Path to the external Python file
         let python_file_path = "py_script/main.py";
 
