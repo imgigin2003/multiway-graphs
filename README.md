@@ -8,7 +8,14 @@
 # How to run?
 
 1. install python if you already haven't, verify by running `python3 --version`
-2. run `echo $LIBRARY_PATH` to ensure that the library path is being picked up correctly
+2. enter the `rust-python-integration- directory
+3. ensure your python environment is activated. run the following commands:
+
+- `python3 -m venv myvenv`
+- `source myvenv/bin/activate`
+
+4. run `pip install -r requirements.txt` to ensure all of the dependencies are installed
+5. run `echo $LIBRARY_PATH` to ensure that the library path is being picked up correctly
 
 - you get something like this: `/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib`
 - update your `build.rs` file based on the library path you get.
@@ -27,7 +34,7 @@
       }
     ```
 
-3. to be more sure that you won't get any FFI erros, complete the following steps:
+6. to be more sure that you won't get any FFI erros, complete the following steps:
 
 - run `echo $SHELL`
 
@@ -36,7 +43,7 @@
 
 - based on your shell, run either `source ~/.bashrc` or `source ~/.zshrc`
 
-4. run the following to compile the program:
+7. run the following to compile the program:
 
 - `cargo clean`
 - `cargo build`
