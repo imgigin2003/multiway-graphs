@@ -44,9 +44,11 @@
 
 # Usage
 
-- after running, hit 'visualize' in the first tab to get the default graph
-- in the 'Graph Properties' and 'Graph Table' tabs, you can see the information about the graph
+- after running, you have two visualization tabs. one for Hypergraph and the other for Dual hypergraph
+- in the 'Graph Properties' and 'Graph Table' tabs, you can see the information about the graphs
 - in the 'Graph Edit' tab, you can see three subtabs. one for Add, one for Edit, and one for Delete
+
+* BE AWARE THAT YOU CAN ONLY MAKE CHANGED ON THE ORIGINAL GRAPH
   - in 'Add' subtab, enter the edge name and nodes you want to include
   - in the 'Edit' subtab, from the dropdown menu, you can choose which edge you want to modify
   - in the 'Delete' subtab, from the dropdown menu, you can choose which edge you want to delete
