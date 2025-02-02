@@ -34,7 +34,7 @@
       }
     ```
 
-6. to be more sure that you won't get any FFI erros, complete the following steps:
+6. to be more sure that you won't get any FFI errors, complete the following steps:
 
 - run `echo $SHELL`
 
