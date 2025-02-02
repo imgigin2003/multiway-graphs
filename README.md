@@ -29,12 +29,12 @@
 
 3. to be more sure that you won't get any FFI erros, complete the following steps:
 
-- run 'echo $SHELL'
+- run ```bash echo $SHELL```
 
-  - if it returns '/bin/bash', then run -> echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.bashrc
-  - if it returns '/bin/zsh', then run -> echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.zshrc
+  - if it returns ```bash /bin/bash```, then run -> ```bash echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.bashrc```
+  - if it returns ```bash /bin/zsh```, then run -> ```bash echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.zshrc```
 
-- based on your shell, run either 'source ~/.bashrc' or 'source ~/.zshrc
+- based on your shell, run either ```bash source ~/.bashrc``` or ```bash source ~/.zshrc```
 
 4. run the following to compile the program:
 
