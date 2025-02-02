@@ -7,17 +7,40 @@
 
 # How to run?
 
-- ensure your Python environment is activated
-- ensure you have 'hypernetx', 'streamlit', and 'matplotlib' installed in your Python packages
-- enter the rust-python-integration folder
-  
-# IMPORTANT
-- to avoid any FFI error:
-  - run 'echo $SHELL'
-    - if it returns '/bin/bash, then run -> echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.bashrc
-    - if it returns '/bin/zsh, then run -> echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.zshrc
-  - based on your shell, run either 'source ~/.bashrc' or 'source ~/.zshrc
-- in the terminal, execute the program with 'cargo run'
+1. install python if you already haven't, verify by running `bash python3 --version`
+2. run `bash echo $LIBRARY_PATH` to ensure that the library path is being picked up correctly
+
+- you get something like this: `bash/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib`
+- update you `bash build.rs` file based on the library path you get.
+- E.g:
+
+  - ```rust
+      fn main() {
+        // Link the Python 3.13 library
+        println!("cargo:rustc-link-lib=python3.13");
+
+        // Specify the search path for the Python libraries
+        println!("cargo:rustc-link-search=native=/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib");
+
+        // Ensure Rust rebuilds when Python version changes
+        println!("cargo:rerun-if-env-changed=PYTHON_SYS_EXECUTABLE");
+      }
+    ```
+
+3. to be more sure that you won't get any FFI erros, complete the following steps:
+
+- run 'echo $SHELL'
+
+  - if it returns '/bin/bash', then run -> echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.bashrc
+  - if it returns '/bin/zsh', then run -> echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.zshrc
+
+- based on your shell, run either 'source ~/.bashrc' or 'source ~/.zshrc
+
+4. run the following to compile the program:
+
+- `bash cargo clean`
+- `bash cargo build`
+- `bash cargo run`
 
 # Usage
 
