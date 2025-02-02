@@ -29,12 +29,12 @@
 
 3. to be more sure that you won't get any FFI erros, complete the following steps:
 
-- run ```echo $SHELL```
+- run `echo $SHELL`
 
-  - if it returns ```/bin/bash```, then run -> ```echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.bashrc```
-  - if it returns ```/bin/zsh```, then run -> ```echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.zshrc```
+  - if it returns `/bin/bash`, then run -> `echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.bashrc`
+  - if it returns `/bin/zsh`, then run -> `echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.zshrc`
 
-- based on your shell, run either ```source ~/.bashrc``` or ```source ~/.zshrc```
+- based on your shell, run either `source ~/.bashrc` or `source ~/.zshrc`
 
 4. run the following to compile the program:
 
@@ -48,7 +48,7 @@
 - in the 'Graph Properties' and 'Graph Table' tabs, you can see the information about the graphs
 - in the 'Graph Edit' tab, you can see three subtabs. one for Add, one for Edit, and one for Delete
 
-* BE AWARE THAT YOU CAN ONLY MAKE CHANGED ON THE ORIGINAL GRAPH
+* BE AWARE THAT YOU CAN ONLY MAKE CHANGES ON THE ORIGINAL GRAPH
   - in 'Add' subtab, enter the edge name and nodes you want to include
   - in the 'Edit' subtab, from the dropdown menu, you can choose which edge you want to modify
   - in the 'Delete' subtab, from the dropdown menu, you can choose which edge you want to delete
