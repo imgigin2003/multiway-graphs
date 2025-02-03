@@ -17,7 +17,7 @@ def create_hypergraph():
     return H, hyperedges
 
 def draw_hypergraph(H):
-    fig, ax = plt.subplots(figsize= (8, 6))
+    fig, ax = plt.subplots(figsize= (8, 6)) #creates a figure with 8 * 6 dimensions
 
     # Visualize the hypergraph using hypernetx and matplotlib
     hnx.draw(H, with_node_labels=True, with_edge_labels=True, ax = ax)
