@@ -18,7 +18,10 @@ def draw_layered_hypergraph(H, hyperedges):
             node_layer[node] = current_layer  # Store node-layer mapping
         current_layer += 1  # Move to the next layer
 
-    layers_color = ['red', 'green', 'blue', 'purple', 'orange', 'cyan']  # Layer colors
+    # Use a dynamic colormap for more layer color options
+    colormap = plt.get_cmap("tab20", current_layer)  # Colormap for up to 20 layers
+    layers_color = [colormap(i) for i in range(current_layer)]
+    
     node_positions = {}  # Stores the 3D positions of nodes
 
     for layer, nodes in layers.items():
@@ -47,7 +50,7 @@ def draw_layered_hypergraph(H, hyperedges):
     ax.set_ylabel("Y-axis")
     ax.set_zlabel("Z-axis (Layers)")
     ax.view_init(elev=20, azim=60)  # Adjust 3D view
-    return fig
+    plt.show()
 
 if __name__ == "__main__":
     H, hyperedges = create_hypergraph()
