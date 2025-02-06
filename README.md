@@ -48,7 +48,8 @@ Watch the demo in action!
 
 2. `export LIBRARY_PATH=$(python3.13-config --prefix)/lib`
 
-- Save & exit (`CTRL + O`, `ENTER`, `CTRL + X`), then apply changes:
+- Save & exit (`CTRL + O`, `ENTER`, `CTRL + X`)
+- then apply changes:
 
 3. `source ~/.zshrc  # (Or ~/.bashrc, ~/.fishrc, etc.)`
 
