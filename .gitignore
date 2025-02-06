@@ -19,3 +19,4 @@ Thumbs.db
 
 /target
 rust-python-integration/py_script/__pycache__/hypergraph.cpython-313.pyc
+/rust-python-integration/py_script/__pycache__
