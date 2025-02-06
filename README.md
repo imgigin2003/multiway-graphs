@@ -13,6 +13,7 @@ Watch the demo in action!
 
 - py_script/hypergraph.py -> visualizes a hypergraph based on the given info
 - py_script/dual_hypergraph.py -> visualizes the dual hypergraph based on the hypergraph
+- py_script/layered_hypergraph.py -> visualizes the layered graph based on the hypergraph
 - py_script/main.py -> utilizes a web app for displaying the graph info
 - src/main.py -> compiles Python code and handling streamlit
 
