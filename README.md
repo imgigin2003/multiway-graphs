@@ -43,9 +43,13 @@ Watch the demo in action!
 6️⃣ If using Zsh, Bash, Fish, etc., configure the shell:
 
 1. `nano ~/.zshrc  # (Or ~/.bashrc, ~/.fishrc, etc.)`
-   add this line:
+
+- add this line:
+
 2. `export LIBRARY_PATH=$(python3.13-config --prefix)/lib`
-   Save & exit (`CTRL + O`, `ENTER`, `CTRL + X`), then apply changes:
+
+- Save & exit (`CTRL + O`, `ENTER`, `CTRL + X`), then apply changes:
+
 3. `source ~/.zshrc  # (Or ~/.bashrc, ~/.fishrc, etc.)`
 
 7️⃣ Compile & run:
