@@ -30,31 +30,26 @@ Watch the demo in action!
 2. `source myvenv/bin/activate`
 
 4️⃣ install dependencies
-
 - `pip install -r requirements.txt`
 
 5️⃣ Ensure your library path is correctly picked up
-
 - `echo $SHELL`
 
 - if needed, update your `build.rs` file based on the output
   - `println!("cargo:rustc-link-search=native=/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib");`
 
 6️⃣ If using Zsh, Bash, Fish, etc., configure the shell:
-
 1. `nano ~/.zshrc  # (Or ~/.bashrc, ~/.fishrc, etc.)`
 
 - add this line:
-
 2. `export LIBRARY_PATH=$(python3.13-config --prefix)/lib`
 
 - Save & exit (`CTRL + O`, `ENTER`, `CTRL + X`)
+  
 - then apply changes:
-
 3. `source ~/.zshrc  # (Or ~/.bashrc, ~/.fishrc, etc.)`
 
 7️⃣ Compile & run:
-
 1. `cargo clean`
 2. `cargo build`
 3. `cargo run`
