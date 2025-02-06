@@ -4,7 +4,7 @@ import numpy as np
 from hypergraph import create_hypergraph
 
 def draw_layered_hypergraph(H, hyperedges):
-    fig = plt.figure(figsize=(10, 8))
+    fig = plt.figure(figsize=(12, 10))
     ax = fig.add_subplot(111, projection='3d')
 
     node_positions = {}  # Store node positions per layer
@@ -53,8 +53,5 @@ def draw_layered_hypergraph(H, hyperedges):
     ax.set_ylabel("Y-axis")
     ax.set_zlabel("Z-axis (Layers)")
     ax.view_init(elev=20, azim=60)
-    plt.show()
-
-if __name__ == "__main__":
-    H, hyperedges = create_hypergraph()
-    draw_layered_hypergraph(H, hyperedges)
+    
+    return fig
