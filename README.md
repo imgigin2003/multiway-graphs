@@ -1,63 +1,50 @@
 # Multiway Graphs (Hypergraph)
 
+![Python](https://img.shields.io/badge/Python-3.13-blue)  
+![Rust](https://img.shields.io/badge/Rust-1.71-orange)  
+![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-red)
+
+## 🎥 Demo
+
+Watch the demo in action!  
+[![Watch the demo](output.gif)]
+
+## 📌 Project Overview
+
 - py_script/hypergraph.py -> visualizes a hypergraph based on the given info
 - py_script/dual_hypergraph.py -> visualizes the dual hypergraph based on the hypergraph
 - py_script/main.py -> utilizes a web app for displaying the graph info
 - src/main.py -> compiles Python code and handling streamlit
 
-# How to run?
+## 🚀 How to Run?
 
-1. install python if you already haven't, verify by running `python3 --version`
-2. enter the `rust-python-integration` directory
-3. ensure your python environment is activated. run the following commands:
+1️⃣ **Install Python** if you haven't yet. Verify with:  
+`python3 --version`
 
-- `python3 -m venv myvenv`
-- `source myvenv/bin/activate`
+2️⃣ Enter the `rust-python-integration` directory
 
-4. run `pip install -r requirements.txt` to ensure all of the dependencies are installed
-5. run `echo $LIBRARY_PATH` to ensure that the library path is being picked up correctly
+3️⃣ Activate your Python environment
+`python3 -m venv myvenv`
+`source myvenv/bin/activate`
 
-- you get something like this: `/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib`
-- update your `build.rs` file based on the library path you get.
-- E.g:
+4️⃣ install dependencies
+`pip install -r requirements.txt`
 
-  - ```rust
-      fn main() {
-        // Link the Python 3.13 library
-        println!("cargo:rustc-link-lib=python3.13");
+5️⃣ Ensure your library path is correctly picked up
+`echo $SHELL`
 
-        // Specify the search path for the Python libraries
-        println!("cargo:rustc-link-search=native=/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib");
+- if needed, update your `build.rs` file based on the output
+  - `println!("cargo:rustc-link-search=native=/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib");`
 
-        // Ensure Rust rebuilds when Python version changes
-        println!("cargo:rerun-if-env-changed=PYTHON_SYS_EXECUTABLE");
-      }
-    ```
+6️⃣ If using Zsh, Bash, Fish, etc., configure the shell:
+`nano ~/.zshrc  # (Or ~/.bashrc, ~/.fishrc, etc.)`
+add this line:
+`export LIBRARY_PATH=$(python3.13-config --prefix)/lib`
+Save & exit (`CTRL + O`, `ENTER`, `CTRL + X`), then apply changes:
+`source ~/.zshrc  # (Or ~/.bashrc, ~/.fishrc, etc.)`
 
-6. to be more sure that you won't get any FFI errors, complete the following steps:
-
-- run `echo $SHELL`
-
-  - if it returns `/bin/bash`, then run -> `echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.bashrc`
-  - if it returns `/bin/zsh`, then run -> `echo 'export LIBRARY_PATH=$(python3.13 -config --prefix)/lib' >> ~/.zshrc`
-
-- based on your shell, run either `source ~/.bashrc` or `source ~/.zshrc`
-
-7. run the following to compile the program:
+7️⃣ Compile & run:
 
 - `cargo clean`
 - `cargo build`
 - `cargo run`
-
-# Usage
-
-- after running, you have two visualization tabs. one for Hypergraph and the other for Dual hypergraph
-- in the 'Graph Properties' and 'Graph Table' tabs, you can see the information about the graphs
-- in the 'Graph Edit' tab, you can see three subtabs. one for Add, one for Edit, and one for Delete
-
-* BE AWARE THAT YOU CAN ONLY MAKE CHANGES ON THE ORIGINAL GRAPH
-  - in 'Add' subtab, enter the edge name and nodes you want to include
-  - in the 'Edit' subtab, from the dropdown menu, you can choose which edge you want to modify
-  - in the 'Delete' subtab, from the dropdown menu, you can choose which edge you want to delete
-  - after any modification, make sure to hit the 'visualize' button in the 'Graph Visualize' tab to refresh
-    the properties tab and table tab
