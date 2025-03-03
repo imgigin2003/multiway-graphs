@@ -33,9 +33,10 @@ Watch the demo in action!
 - `pip install -r requirements.txt`
 
 5️⃣ Ensure your library path is correctly picked up
-- `echo $SHELL`
+- `python3 -c "import sysconfig; print(sysconfig.get_path('stdlib'))"`
+- it returns something like this: `/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib`
 
-- if needed, update your `build.rs` file based on the output
+- update your `build.rs` file based on the output
   - `println!("cargo:rustc-link-search=native=/usr/local/opt/python@3.13/Frameworks/Python.framework/Versions/3.13/lib");`
 
 6️⃣ If using Zsh, Bash, Fish, etc., configure the shell:
