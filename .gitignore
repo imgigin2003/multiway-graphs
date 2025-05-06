@@ -18,4 +18,4 @@ Thumbs.db
 # Added by cargo
 
 /target
-/rust-python-integration/py_script/__pycache__
+/rust-python-integration/py_script/__pycache__/
