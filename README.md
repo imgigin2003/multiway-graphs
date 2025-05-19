@@ -4,16 +4,10 @@
 ![Rust](https://img.shields.io/badge/Rust-1.71-orange)  
 ![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-red)
 
-## 🎥 Demo
-
-Watch the demo in action!  
-[![Watch the demo](output.gif)]
-
 ## 📌 Project Overview
 
 - py_script/hypergraph.py -> visualizes a hypergraph based on the given info
 - py_script/dual_hypergraph.py -> visualizes the dual hypergraph based on the hypergraph
-- py_script/layered_hypergraph.py -> visualizes the layered graph based on the hypergraph
 - py_script/main.py -> utilizes a web app for displaying the graph info
 - src/main.py -> compiles Python code and handling streamlit
 
